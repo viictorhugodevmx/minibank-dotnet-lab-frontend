@@ -1,22 +1,193 @@
-html {
-  font-size: 14px;
+:root {
+  --mb-bg: #0f172a;
+  --mb-card: #111c33;
+  --mb-card-soft: #17233d;
+  --mb-text: #e5e7eb;
+  --mb-muted: #94a3b8;
+  --mb-accent: #38bdf8;
+  --mb-accent-soft: rgba(56, 189, 248, 0.14);
+  --mb-border: rgba(148, 163, 184, 0.18);
+  --mb-error: #fecaca;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+* {
+  box-sizing: border-box;
 }
 
 body {
-  margin-bottom: 60px;
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.16), transparent 34rem),
+    var(--mb-bg);
+  color: var(--mb-text);
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+.container {
+  max-width: 1180px;
+}
+
+.minibank-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 3rem 0 2rem;
+}
+
+.minibank-eyebrow {
+  margin: 0 0 0.5rem;
+  color: var(--mb-accent);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+.minibank-hero h1 {
+  margin: 0;
+  font-size: clamp(2.2rem, 5vw, 4.5rem);
+  line-height: 0.95;
+}
+
+.minibank-hero p {
+  max-width: 42rem;
+  margin: 1rem 0 0;
+  color: var(--mb-muted);
+}
+
+.minibank-badge {
+  border: 1px solid var(--mb-border);
+  background: var(--mb-accent-soft);
+  color: var(--mb-accent);
+  border-radius: 999px;
+  padding: 0.55rem 0.9rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.minibank-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.minibank-card,
+.minibank-account,
+.minibank-alert {
+  border: 1px solid var(--mb-border);
+  background: rgba(17, 28, 51, 0.84);
+  border-radius: 1.25rem;
+  padding: 1.1rem;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.18);
+}
+
+.minibank-card--primary {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.22), rgba(17, 28, 51, 0.92));
+}
+
+.minibank-card span,
+.minibank-card small {
+  display: block;
+  color: var(--mb-muted);
+}
+
+.minibank-card strong {
+  display: block;
+  margin: 0.6rem 0;
+  font-size: 1.55rem;
+}
+
+.minibank-section {
+  margin-top: 2rem;
+}
+
+.minibank-section__header {
+  margin-bottom: 1rem;
+}
+
+.minibank-section__header h2 {
+  margin: 0;
+}
+
+.minibank-section__header p {
+  margin: 0.25rem 0 0;
+  color: var(--mb-muted);
+}
+
+.minibank-accounts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.minibank-account {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.minibank-account span {
+  display: block;
+  color: var(--mb-muted);
+}
+
+.minibank-account p {
+  margin: 0;
+  font-weight: 900;
+}
+
+.minibank-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--mb-border);
+  border-radius: 1.25rem;
+  background: rgba(17, 28, 51, 0.74);
+}
+
+.minibank-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.minibank-table th,
+.minibank-table td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--mb-border);
+  text-align: left;
+}
+
+.minibank-table th {
+  color: var(--mb-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.minibank-alerts {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.minibank-alert {
+  color: var(--mb-text);
+}
+
+.minibank-alert--error {
+  color: var(--mb-error);
+  border-color: rgba(248, 113, 113, 0.4);
+}
+
+@media (max-width: 900px) {
+  .minibank-grid,
+  .minibank-accounts {
+    grid-template-columns: 1fr;
+  }
+
+  .minibank-hero {
+    flex-direction: column;
+  }
 }

@@ -1,10 +1,116 @@
-﻿@page
+@page
 @model IndexModel
-@{
-    ViewData["Title"] = "Home page";
-}
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="minibank-hero">
+    <div>
+        <p class="minibank-eyebrow">MiniBank DotNet Lab</p>
+        <h1>Financial Overview</h1>
+        <p>
+            Razor front consumiendo una API ASP.NET Core.
+        </p>
+    </div>
+
+    <span class="minibank-badge">.NET + Razor</span>
+</section>
+
+@if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+{
+    <section class="minibank-alert minibank-alert--error">
+        @Model.ErrorMessage
+    </section>
+}
+else
+{
+    <section class="minibank-grid">
+        <article class="minibank-card minibank-card--primary">
+            <span>Saldo total</span>
+            <strong>@Model.Summary?.TotalBalance.ToString("C")</strong>
+            <small>Balance consolidado</small>
+        </article>
+
+        <article class="minibank-card">
+            <span>Ingresos recientes</span>
+            <strong>@Model.Summary?.MonthlyIncome.ToString("C")</strong>
+            <small>Movimientos income</small>
+        </article>
+
+        <article class="minibank-card">
+            <span>Gastos recientes</span>
+            <strong>@Model.Summary?.MonthlyExpenses.ToString("C")</strong>
+            <small>Movimientos expense</small>
+        </article>
+
+        <article class="minibank-card">
+            <span>Movimientos</span>
+            <strong>@Model.Summary?.MovementCount</strong>
+            <small>Total registrados</small>
+        </article>
+    </section>
+
+    <section class="minibank-section">
+        <div class="minibank-section__header">
+            <h2>Cuentas</h2>
+            <p>Productos financieros simulados.</p>
+        </div>
+
+        <div class="minibank-accounts">
+            @foreach (var account in Model.Accounts)
+            {
+                <article class="minibank-account">
+                    <div>
+                        <strong>@account.Product</strong>
+                        <span>@account.Holder</span>
+                    </div>
+                    <p>@account.Balance.ToString("C") @account.Currency</p>
+                </article>
+            }
+        </div>
+    </section>
+
+    <section class="minibank-section">
+        <div class="minibank-section__header">
+            <h2>Movimientos</h2>
+            <p>Últimas transacciones simuladas.</p>
+        </div>
+
+        <div class="minibank-table-wrap">
+            <table class="minibank-table">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Descripción</th>
+                        <th>Tipo</th>
+                        <th>Monto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var movement in Model.Movements)
+                    {
+                        <tr>
+                            <td>@movement.Date.ToString("dd/MM/yyyy")</td>
+                            <td>@movement.Description</td>
+                            <td>@movement.Type</td>
+                            <td>@movement.Amount.ToString("C")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="minibank-section">
+        <div class="minibank-section__header">
+            <h2>Alertas</h2>
+            <p>Señales simples calculadas desde la API.</p>
+        </div>
+
+        <div class="minibank-alerts">
+            @foreach (var alert in Model.Summary?.Alerts ?? new List<string>())
+            {
+                <article class="minibank-alert">
+                    @alert
+                </article>
+            }
+        </div>
+    </section>
+}
