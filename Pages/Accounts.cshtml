@@ -1,0 +1,45 @@
+@page "/accounts"
+@model AccountsModel
+
+<section class="minibank-hero">
+    <div>
+        <p class="minibank-eyebrow">MiniBank Accounts</p>
+        <h1>Cuentas</h1>
+        <p>
+            Vista Razor dedicada para mostrar productos financieros consumidos desde la API.
+        </p>
+    </div>
+
+    <span class="minibank-badge">Razor Page</span>
+</section>
+
+@if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+{
+    <section class="minibank-alert minibank-alert--error">
+        @Model.ErrorMessage
+    </section>
+}
+else
+{
+    <section class="minibank-section">
+        <div class="minibank-section__header">
+            <h2>Productos activos</h2>
+            <p>Datos simulados entregados por HolaDotnet API.</p>
+        </div>
+
+        <div class="minibank-accounts">
+            @foreach (var account in Model.Accounts)
+            {
+                <article class="minibank-account minibank-account--detail">
+                    <div>
+                        <strong>@account.Product</strong>
+                        <span>Titular: @account.Holder</span>
+                        <small>ID: @account.Id</small>
+                    </div>
+
+                    <p>@account.Balance.ToString("C") @account.Currency</p>
+                </article>
+            }
+        </div>
+    </section>
+}

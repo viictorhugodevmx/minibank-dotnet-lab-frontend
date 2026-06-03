@@ -247,3 +247,13 @@ footer,
 .border-top {
   display: none !important;
 }
+
+.minibank-account--detail {
+  align-items: flex-start;
+}
+
+.minibank-account small {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--mb-muted);
+}
