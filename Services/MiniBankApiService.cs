@@ -32,10 +32,26 @@ public class MiniBankApiService
         ) ?? new List<AccountViewModel>();
     }
 
+    public async Task<AccountViewModel?> GetAccountByIdAsync(string accountId)
+    {
+        return await _httpClient.GetFromJsonAsync<AccountViewModel>(
+            $"/api/minibank/accounts/{accountId}",
+            _jsonOptions
+        );
+    }
+
     public async Task<List<MovementViewModel>> GetMovementsAsync()
     {
         return await _httpClient.GetFromJsonAsync<List<MovementViewModel>>(
             "/api/minibank/movements",
+            _jsonOptions
+        ) ?? new List<MovementViewModel>();
+    }
+
+    public async Task<List<MovementViewModel>> GetMovementsByAccountIdAsync(string accountId)
+    {
+        return await _httpClient.GetFromJsonAsync<List<MovementViewModel>>(
+            $"/api/minibank/accounts/{accountId}/movements",
             _jsonOptions
         ) ?? new List<MovementViewModel>();
     }

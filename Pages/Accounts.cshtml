@@ -37,7 +37,12 @@ else
                         <small>ID: @account.Id</small>
                     </div>
 
-                    <p>@account.Balance.ToString("C") @account.Currency</p>
+                    <div class="minibank-account__side">
+                        <p>@account.Balance.ToString("C") @account.Currency</p>
+                        <a class="minibank-link" asp-page="/AccountDetail" asp-route-accountId="@account.Id">
+                            Ver detalle
+                        </a>
+                    </div>
                 </article>
             }
         </div>

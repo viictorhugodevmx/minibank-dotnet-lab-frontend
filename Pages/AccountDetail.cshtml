@@ -1,0 +1,80 @@
+@page "/accounts/{accountId}"
+@model AccountDetailModel
+
+<section class="minibank-hero">
+    <div>
+        <p class="minibank-eyebrow">Account Detail</p>
+        <h1>@(Model.Account?.Product ?? "Cuenta no encontrada")</h1>
+        <p>
+            Detalle de cuenta y movimientos relacionados.
+        </p>
+    </div>
+
+    <a class="minibank-badge" asp-page="/Accounts">Volver a cuentas</a>
+</section>
+
+@if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+{
+    <section class="minibank-alert minibank-alert--error">
+        @Model.ErrorMessage
+    </section>
+}
+else if (Model.Account is not null)
+{
+    <section class="minibank-grid">
+        <article class="minibank-card minibank-card--primary">
+            <span>Producto</span>
+            <strong>@Model.Account.Product</strong>
+            <small>@Model.Account.Id</small>
+        </article>
+
+        <article class="minibank-card">
+            <span>Titular</span>
+            <strong>@Model.Account.Holder</strong>
+            <small>Cliente activo</small>
+        </article>
+
+        <article class="minibank-card">
+            <span>Saldo</span>
+            <strong>@Model.Account.Balance.ToString("C")</strong>
+            <small>@Model.Account.Currency</small>
+        </article>
+
+        <article class="minibank-card">
+            <span>Movimientos</span>
+            <strong>@Model.Movements.Count</strong>
+            <small>Asociados a esta cuenta</small>
+        </article>
+    </section>
+
+    <section class="minibank-section">
+        <div class="minibank-section__header">
+            <h2>Movimientos de la cuenta</h2>
+            <p>Filtrados desde la API por accountId.</p>
+        </div>
+
+        <div class="minibank-table-wrap">
+            <table class="minibank-table">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Descripción</th>
+                        <th>Tipo</th>
+                        <th>Monto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var movement in Model.Movements)
+                    {
+                        <tr>
+                            <td>@movement.Date.ToString("dd/MM/yyyy")</td>
+                            <td>@movement.Description</td>
+                            <td>@movement.Type</td>
+                            <td>@movement.Amount.ToString("C")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+}
