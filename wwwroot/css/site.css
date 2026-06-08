@@ -257,3 +257,49 @@ footer,
   margin-top: 0.35rem;
   color: var(--mb-muted);
 }
+
+.minibank-form {
+  display: grid;
+  gap: 1rem;
+  max-width: 720px;
+  border: 1px solid var(--mb-border);
+  background: rgba(17, 28, 51, 0.84);
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+}
+
+.minibank-form label {
+  display: grid;
+  gap: 0.45rem;
+  color: var(--mb-muted);
+  font-weight: 800;
+}
+
+.minibank-form input,
+.minibank-form select {
+  width: 100%;
+  border: 1px solid var(--mb-border);
+  border-radius: 0.85rem;
+  background: rgba(15, 23, 42, 0.9);
+  color: var(--mb-text);
+  padding: 0.85rem 1rem;
+}
+
+.minibank-form span {
+  color: var(--mb-error);
+  font-size: 0.85rem;
+}
+
+.minibank-form button {
+  border: 0;
+  border-radius: 999px;
+  background: var(--mb-accent);
+  color: #082f49;
+  font-weight: 900;
+  padding: 0.9rem 1.2rem;
+  cursor: pointer;
+}
+
+.minibank-form button:hover {
+  filter: brightness(1.08);
+}

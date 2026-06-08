@@ -1,0 +1,60 @@
+@page "/movements/new"
+@model NewMovementModel
+
+<section class="minibank-hero">
+    <div>
+        <p class="minibank-eyebrow">MiniBank Operations</p>
+        <h1>Nuevo movimiento</h1>
+        <p>
+            Formulario Razor enviando un POST hacia la API ASP.NET Core.
+        </p>
+    </div>
+
+    <a class="minibank-badge" asp-page="/Index">Volver</a>
+</section>
+
+@if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+{
+    <section class="minibank-alert minibank-alert--error">
+        @Model.ErrorMessage
+    </section>
+}
+
+<form class="minibank-form" method="post">
+    @Html.AntiForgeryToken()
+
+    <label>
+        Cuenta
+        <select asp-for="Form.AccountId">
+            <option value="">Selecciona una cuenta</option>
+            @foreach (var account in Model.Accounts)
+            {
+                <option value="@account.Id">@account.Product - @account.Balance.ToString("C")</option>
+            }
+        </select>
+        <span asp-validation-for="Form.AccountId"></span>
+    </label>
+
+    <label>
+        Descripción
+        <input asp-for="Form.Description" placeholder="Ej. Pago de servicio" />
+        <span asp-validation-for="Form.Description"></span>
+    </label>
+
+    <label>
+        Tipo
+        <select asp-for="Form.Type">
+            <option value="expense">Gasto</option>
+            <option value="income">Ingreso</option>
+        </select>
+        <span asp-validation-for="Form.Type"></span>
+    </label>
+
+    <label>
+        Monto
+        <input asp-for="Form.Amount" type="number" step="0.01" placeholder="Ej. 500" />
+        <span asp-validation-for="Form.Amount"></span>
+    </label>
+
+    <button type="submit">Guardar movimiento</button>
+</form>

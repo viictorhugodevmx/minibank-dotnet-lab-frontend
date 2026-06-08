@@ -55,4 +55,11 @@ public class MiniBankApiService
             _jsonOptions
         ) ?? new List<MovementViewModel>();
     }
+
+    public async Task<bool> CreateMovementAsync(CreateMovementFormModel form)
+    {
+        var response = await _httpClient.PostAsJsonAsync("/api/minibank/movements", form);
+
+        return response.IsSuccessStatusCode;
+    }
 }
